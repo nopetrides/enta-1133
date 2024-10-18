@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enta-1133-Week6", "Enta-1133-Week6\Enta-1133-Week6.csproj", "{E2248570-3083-442F-954D-6B59366A466E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2248570-3083-442F-954D-6B59366A466E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2248570-3083-442F-954D-6B59366A466E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2248570-3083-442F-954D-6B59366A466E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2248570-3083-442F-954D-6B59366A466E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7973165-2881-4E94-879A-17E37F79FF55}
+	EndGlobalSection
+EndGlobal
