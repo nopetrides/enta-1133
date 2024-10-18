@@ -1,31 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomBase
 {
     // todo make them all lambdo like north
-    private RoomBase north, east, south, west;
+    private RoomBase _north, _east, _south, _west;
 
-    public RoomBase North => north;
-    public RoomBase East => east;
-    public RoomBase South => south; 
-    public RoomBase West1 => west;
+    public RoomBase North => _north;
+    public RoomBase East => _east;
+    public RoomBase South => _south; 
+    public RoomBase West => _west;
 
-    private int roomNumber;
+    private Vector2 _roomPosition;
+    public Vector2 RoomPosition => _roomPosition;
 
-    public RoomBase(int num)
+    public RoomBase(Vector2 coordinates)
     {
-        roomNumber = num;
-        Console.WriteLine("Room " + num + " Created!");
+        _roomPosition = coordinates;
+        Console.WriteLine("Room " + _roomPosition + " Created!");
     }
 
     public void SetRooms(RoomBase roomNorth, RoomBase roomEast, RoomBase roomSouth, RoomBase roomWest)
     {
-        north = roomNorth;
-        east = roomEast;
-        south = roomSouth;
-        west = roomWest;
+        _north = roomNorth;
+        _east = roomEast;
+        _south = roomSouth;
+        _west = roomWest;
     }
 }

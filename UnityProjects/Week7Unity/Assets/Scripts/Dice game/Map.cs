@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Map
@@ -5,9 +6,8 @@ public class Map
     /// <summary>
     /// Map is this number squared
     /// </summary>
-    int mapSize = 9;
-    public int MapSize => mapSize;
-    RoomBase[] Rooms;
+    private const int MapSize = 9;
+    readonly Dictionary<Vector2, RoomBase> _rooms = new ();
 
     public Map()
     {
@@ -20,31 +20,23 @@ public class Map
     /// </summary>
     private void CreateMap()
     {
-        Rooms = new RoomBase[mapSize * mapSize];
-        for (int i = 0; i < Rooms.Length; i++)
+		for (int x = 0; x < MapSize; x++)
         {
-            // todo Random 
-            Rooms[i] = new RoomBase(i);
-        }
-
-        RoomBase currentRoom;
-
-        for (int i = 0; i < Rooms.Length; i++)
-        {
-            currentRoom = Rooms[i];
-
-            // example how to loop through all Directions
-            /*
-            foreach(Direction dir in Enum.GetValues(typeof(Direction)))
+            for (int z = 0; z < MapSize; z++)
             {
-                RoomBase nextRooom = FindRoom(i, dir);
-            }*/
-            RoomBase northRoom = FindRoom(i, Direction.North);
-            RoomBase eastRoom = FindRoom(i, Direction.East);
-            RoomBase southRoom = FindRoom(i, Direction.South);
-            RoomBase westRoom = FindRoom(i, Direction.West);
+				Vector2 coords = new Vector2(x,z);
+				_rooms.Add(coords, new RoomBase(coords));
+			}
+		}
 
-            currentRoom.SetRooms(northRoom, eastRoom, southRoom, westRoom);
+        foreach (var roomByCoordinate in _rooms)
+        {
+            RoomBase northRoom = FindRoom(roomByCoordinate.Key, Direction.North);
+            RoomBase eastRoom = FindRoom(roomByCoordinate.Key, Direction.East);
+            RoomBase southRoom = FindRoom(roomByCoordinate.Key, Direction.South);
+            RoomBase westRoom = FindRoom(roomByCoordinate.Key, Direction.West);
+
+            roomByCoordinate.Value.SetRooms(northRoom, eastRoom, southRoom, westRoom);
         }
     }
 
@@ -53,47 +45,49 @@ public class Map
     /// </summary>
     private void VisualizeMap()
     {
-        for (int x = 0; x < mapSize; x++)
-        {
-            for (int z = 0; z < mapSize; z++)
-            {
-                // using primitives for now, will replace next week
-                var mapRoomRepresentation = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                mapRoomRepresentation.transform.position = new Vector3(x, 0, z);
-            }
-        }
+		foreach(var roomByCoordinate in _rooms)
+		{
+			var mapRoomRepresentation = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            mapRoomRepresentation.transform.position = new Vector3(roomByCoordinate.Key.x, 0, roomByCoordinate.Key.y);
+		}
     }
-
-    public RoomBase FindRoom(int currentRoom, Direction direction)
+    /// <summary>
+    /// Find the next room in a direction from an existing room
+    /// </summary>
+    /// <param name="currentRoom"></param>
+    /// <param name="direction"></param>
+    /// <returns></returns>
+    private RoomBase FindRoom(Vector2 currentRoom, Direction direction)
     {
-        RoomBase room = null!;
+        RoomBase room = null;
+        Vector2 nextRoomCoordinates = new Vector2(-1,-1);
         switch (direction)
         {
             case Direction.North:
                 // Determine North Room
-                int northRoomIndex = currentRoom - mapSize;
-                if (northRoomIndex >= 0)
-                {
-                    room = Rooms[northRoomIndex];
-                }
+                nextRoomCoordinates = currentRoom + Vector2.up;
                 break;
             case Direction.East:
                 // east
+                nextRoomCoordinates = currentRoom + Vector2.right;
                 break;
             case Direction.South:
                 // south
+                nextRoomCoordinates = currentRoom + Vector2.down;
                 break;
             case Direction.West:
                 // west
+                nextRoomCoordinates = currentRoom + Vector2.left;
                 break;
-
         }
+        
+        if (_rooms.TryGetValue(nextRoomCoordinates, out var nextRoom))
+        {
+            room = nextRoom;
+        }
+        
         return room;
     }
 
-    public RoomBase RoomByIndex(int index)
-    {
-        return Rooms[index];
-    }
 }
 
