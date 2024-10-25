@@ -41,11 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8317288332233361665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2694746ab35e97249a0c3c1a2c419f4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ec38a277f7de437abc4c56cda44c67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RoomPrefabs:
-  - {fileID: 4718323431966516166, guid: d9cb4b56326443a469dd28bea9a2ba0d, type: 3}
-  - {fileID: 7927430244711907550, guid: 266fac50d8669914e9d26f7bfc98becc, type: 3}
-  - {fileID: 834006198941309981, guid: 4ceb0c960aa48944e8b71363bea6f73e, type: 3}
+  - {fileID: 4718323431966516166, guid: c814ddcca6b074eaca16c47d8261d1b3, type: 3}
+  - {fileID: 5927252950261838592, guid: b52b40994305045dfb19508468dfd13d, type: 3}
+  - {fileID: 5781574004087886226, guid: c29cd9ea060dd4c7bbcefeeb3353438d, type: 3}
   RoomSize: 10
